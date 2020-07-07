@@ -1,5 +1,9 @@
 import CartActionTypes from './cart.types';
-import { addItemToCart, removeItemFromCart } from './cart.utils';
+import {
+  addItemToCart,
+  clearItemFromCart,
+  removeItemFromCart,
+} from './cart.utils';
 
 const INITIAL_STATE = {
   hidden: true,
@@ -17,10 +21,15 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       ...state,
       items: addItemToCart(state.items, action.payload),
     };
-  } else if (action.type === CartActionTypes.REMOVE_CART_ITEM) {
+  } else if (action.type === CartActionTypes.REMOVE_ITEM) {
     return {
       ...state,
       items: removeItemFromCart(state.items, action.payload),
+    };
+  } else if (action.type === CartActionTypes.CLEAR_CART_ITEM) {
+    return {
+      ...state,
+      items: clearItemFromCart(state.items, action.payload),
     };
   } else return state;
 };
